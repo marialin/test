@@ -1,0 +1,28 @@
+https://coderwall.com/p/w1t00a/upgrade-git-to-2-5-2-in-centos-6-4-through-yum
+Upgrade Git to 2.5.2 in CentOS 6.4 through yum
+LINUX CENTOS RPM GIT
+I found it is impossible to find lastest Git in yum repo. Fortunately, the Git source base has provided make rule to build RPM package. Note you have to build the rpm from the source code repo. Building rpm from source tarball is not supported.
+
+yum install curl-devel expat-devel xmlto asciidoc
+git clone https://github.com/git/git.git
+cd git
+make rpm
+Find the rpms in ~/rpmbuild/RPMS/x86_64
+
+Install RPM:
+
+Remove existing Git:
+yum remove git-all git
+yum clean packages
+create local yum repo:
+yum install createrepo
+cd ~/rpmbuild/RPMS/x86_64
+createrepo .
+Create repo file: /etc/yum.repos.d/local.repo
+[local]
+name=Git-Local
+baseurl=file:///root/rpmbuild/RPMS/x86_64
+enabled=1
+gpgcheck=0
+protect=1
+yum install git
