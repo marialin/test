@@ -1,0 +1,27 @@
+https://tecadmin.net/install-git-on-centos-fedora/
+Step 1 – Install Required Packages
+Before installing Git from source code, make sure you have already installed required packages on your system. If not use the following command to install required packages.
+
+yum install curl-devel expat-devel gettext-devel openssl-devel zlib-devel
+yum install gcc perl-ExtUtils-MakeMaker
+Step 2 – Install Git 2.15
+Download latest Git source code from kernel git or simply use following command to download Git 2.15.
+
+cd /usr/src
+wget https://www.kernel.org/pub/software/scm/git/git-2.15.0.tar.gz
+tar xzf git-2.15.0.tar.gz
+After downloading and extracting Git source code, Use the following command to compile the source code.
+
+cd git-2.15.0
+make prefix=/usr/local/git all
+make prefix=/usr/local/git install
+Step 3 – Setup Environment
+After installation of git client. Now you just need to set binary in the system environment. Set the PATH variable with newly installed git binary in /etc/bashrc by executing below command. Also, reload the changes in the current environment.
+
+echo "export PATH=/usr/local/git/bin:$PATH" >> /etc/bashrc
+source /etc/bashrc
+After completing steps. Let’s use the following command to check current git version.
+
+git --version
+
+git version 2.15.0
